@@ -107,7 +107,7 @@ class FFMPEG_VideoWriter:
             "-hwaccel_output_format",
             "vaapi",
             "-loglevel",
-            "error" if logfile == sp.PIPE else "info",
+            "fatal" if logfile == sp.PIPE else "info",
             "-f",
             "rawvideo",
             "-vcodec",
