@@ -108,6 +108,8 @@ class FFMPEG_VideoWriter:
             "vaapi",
             "-loglevel",
             "error" if logfile == sp.PIPE else "info",
+            "-vf",
+            "'format=nv12,hwupload'",
             "-f",
             "rawvideo",
             "-vcodec",
