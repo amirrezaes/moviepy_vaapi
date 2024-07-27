@@ -165,10 +165,11 @@ class FFMPEG_VideoWriter:
             if "Unknown encoder" in ffmpeg_error:
                 error += (
                     "\n\nThe video export failed because FFMPEG didn't find the "
-                    f"specified codec for video encoding {self.codec}. imma fix this"
+                    f"specified codec for video encoding {self.codec}."
                     "Please install this codec or change the codec when calling "
                     "write_videofile.\nFor instance:\n"
-                    "  >>> clip.write_videofile('myvid.webm', codec='libvpx')"
+                    "  >>> clip.write_videofile('myvid.webm', codec='libvpx')\n\n"
+                    "cmd={}".format(' '.join(cmd))
                 )
 
             elif "incorrect codec parameters ?" in ffmpeg_error:
