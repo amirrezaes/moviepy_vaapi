@@ -102,6 +102,10 @@ class FFMPEG_VideoWriter:
         cmd = [
             FFMPEG_BINARY,
             "-y",
+            "-hwaccel",
+            "vaapi",
+            "-hwaccel_output_format",
+            "vaapi",
             "-loglevel",
             "error" if logfile == sp.PIPE else "info",
             "-f",
