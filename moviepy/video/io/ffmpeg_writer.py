@@ -140,7 +140,7 @@ class FFMPEG_VideoWriter:
         popen_params = cross_platform_popen_params(
             {"stdout": sp.DEVNULL, "stderr": logfile, "stdin": sp.PIPE}
         )
-
+        self.cmd = cmd
         self.proc = sp.Popen(cmd, **popen_params)
 
     def write_frame(self, img_array):
@@ -169,7 +169,7 @@ class FFMPEG_VideoWriter:
                     "Please install this codec or change the codec when calling "
                     "write_videofile.\nFor instance:\n"
                     "  >>> clip.write_videofile('myvid.webm', codec='libvpx')\n\n"
-                    "cmd={}".format(' '.join(cmd))
+                    "cmd={}".format(' '.join(self.cmd))
                 )
 
             elif "incorrect codec parameters ?" in ffmpeg_error:
