@@ -102,17 +102,21 @@ class FFMPEG_VideoWriter:
         cmd = [
             FFMPEG_BINARY,
             "-y",
+            "-init_hw_device",
+            "vaapi=foo:/dev/dri/renderD128",
             "-hwaccel",
             "vaapi",
             "-hwaccel_output_format",
             "vaapi",
+            "-hwaccel_device",
+            "foo",
             "-loglevel",
             "error" if logfile == sp.PIPE else "info",
             "-f",
             "rawvideo",
             "-vcodec",
             "rawvideo",
-            "-s",
+            "-s:v",
             "%dx%d" % (size[0], size[1]),
             "-pix_fmt",
             pixel_format,
@@ -121,6 +125,10 @@ class FFMPEG_VideoWriter:
             "-an",
             "-i",
             "-",
+            "-filter_hw_device",
+            "foo",
+            "-vf",
+            "'format=nv12|vaapi,hwupload'"
         ]
         if audiofile is not None:
             cmd.extend(["-i", audiofile, "-acodec", "copy"])
