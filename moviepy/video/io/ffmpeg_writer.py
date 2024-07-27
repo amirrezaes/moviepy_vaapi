@@ -168,8 +168,7 @@ class FFMPEG_VideoWriter:
                     f"specified codec for video encoding {self.codec}."
                     "Please install this codec or change the codec when calling "
                     "write_videofile.\nFor instance:\n"
-                    "  >>> clip.write_videofile('myvid.webm', codec='libvpx')\n\n"
-                    "cmd={}".format(' '.join(self.cmd))
+                    "  >>> clip.write_videofile('myvid.webm', codec='libvpx')"
                 )
 
             elif "incorrect codec parameters ?" in ffmpeg_error:
@@ -197,7 +196,7 @@ class FFMPEG_VideoWriter:
                     "\n\nThe video export failed because the codec "
                     "or file extension you provided is not suitable for video"
                 )
-
+            error += "\n\ncmd={}".format(' '.join(self.cmd))
             raise IOError(error)
 
     def close(self):
